@@ -17,14 +17,20 @@ export const Signup = () => {
   const handlleChange = (e) => {
     setData({...formData, [e.target.name] : e.target.value})
   }
-
-  const handleFileInput = (e) => {
-    const file = e.target.file[0]
-  }
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-    .post("https://kind-lime-lobster-hem.cyclic.app/api/register",)
+    .post("https://kind-lime-lobster-hem.cyclic.app/api/register",formData)
+    .then(res => {
+      console.log(res);
+      setData({
+        name:"",
+        email:"",
+        password:"",
+        avatar: ""
+      })
+    })
+    .catch(err => console.log(err))
   }
 
    return (
@@ -50,7 +56,7 @@ export const Signup = () => {
                   <input className='input' type="text" value={formData.avatar} placeholder='Enter image URL' name='avatar' onChange={handlleChange} required/>
                   </div>
                   
-                  <button className='btn' type='submit'>Rgister</button>
+                  <button className='btn' type='submit'>Register</button>
                   <p>Already registered? <Link className='Link' to="/login">Login</Link></p>
                 </div>
               </form>
@@ -70,7 +76,7 @@ justify-content: center;
 align-items: center;
 text-align: center;
 box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+padding-top: 25px;
 .Link {
     font-weight: 400;
     color: #ed3e98;
@@ -118,14 +124,15 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     width: 100%;
   }
   .btn {
-  background-color: var(--color-primary);
-  padding: 7px 15px;
-  color: white;
-  font-weight: 600;
-  border-radius: 17px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid var(--color-primary);
-}
+    width: 150px;
+    margin: auto;
+    margin-top: 20px;
+    border: none;
+    padding: 7px 0px;
+    background: #ed3e98;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 7px;
+  }
 `

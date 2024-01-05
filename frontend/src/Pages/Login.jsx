@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../Redux/AuthReducer/action';
 
 const Login = () => {
   const [formData, setData] = useState({
@@ -8,15 +10,25 @@ const Login = () => {
     password:""
   });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handlleChange = (e) => {
     setData({...formData, [e.target.name] : e.target.value})
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(formData)).then(() => {
+      navigate(location.state, {replace:true})
+    })
   }
 
   return (
     <LOGIN>
       <div className="first">
         <h3 className='heading'>Hello! <span className='wel'>Welcome</span> Back 🎉</h3>
-        <form className='form' action="">
+        <form className='form' onSubmit={handleSubmit}>
           <div className='div'>
             <input className='input' type="email" value={formData.email} placeholder='Enter Your Email' name='email' onChange={handlleChange} required/>
             <input className='input' type="password" value={formData.password} placeholder='Enter Your Password' name='password' onChange={handlleChange} required/>

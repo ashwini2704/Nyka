@@ -1,15 +1,13 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { Signup } from './Pages/Signup';
-import Login from './Pages/Login';
 import Navbar from './Pages/Navbar';
+import { AllRoutes } from './Pages/AllRoutes';
 
 function App() {
   return (
     <div className="App">
       <Navbar/>
-      <Signup/>
-      <Login />
+      <AllRoutes/>
     </div>
   );
 }
